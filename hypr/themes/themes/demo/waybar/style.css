@@ -1,0 +1,37 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(24, 24, 37, 0.94);
+  color: #cdd6f4;
+}
+
+#workspaces button,
+#window,
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#tray {
+  padding: 0 10px;
+  color: #cdd6f4;
+}
+
+#workspaces button.active {
+  color: #1e1e2e;
+  background: #89b4fa;
+}
+
+#workspaces button:hover {
+  background: #45475a;
+  box-shadow: none;
+}
+
+#clock {
+  color: #a6e3a1;
+}
