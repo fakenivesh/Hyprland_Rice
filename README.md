@@ -7,7 +7,7 @@ Personal Hyprland configuration built with the `hyprland-lua` configuration syst
 The setup script currently installs packages automatically on Arch Linux using `pacman`. It uses `sudo` for package installation and backs up an existing `~/.config/hypr`, `~/.config/waybar`, or `~/.config/dunst` before replacing it.
 
 ```bash
-git clone <repository-url> Hyprland_Rice
+git clone https://github.com/fakenivesh/Hyprland_Rice.git
 cd Hyprland_Rice
 ./setup.sh
 ```
