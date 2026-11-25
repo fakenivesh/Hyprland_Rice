@@ -1,0 +1,114 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+  font-size: 10px;
+  min-height: 0;
+}
+
+/* Deep blue glass stays legible over the bright sky at the top of the wallpaper. */
+window#waybar {
+  background: transparent;
+  color: #edf4ff;
+}
+
+window#waybar > box {
+  margin: 7px 10px 0;
+  padding: 3px 6px;
+  background: rgba(22, 50, 82, 0.92);
+  border: 1px solid rgba(214, 232, 255, 0.30);
+  border-radius: 13px;
+}
+
+tooltip {
+  background: #163452;
+  color: #edf4ff;
+  border: 1px solid #8bcdf0;
+  border-radius: 9px;
+}
+
+tooltip label {
+  color: #edf4ff;
+  padding: 4px;
+}
+
+#workspaces,
+#window,
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#tray {
+  margin: 2px 3px;
+  padding: 4px 10px;
+  color: #d7e7f8;
+  background: rgba(39, 75, 111, 0.82);
+  border-radius: 9px;
+}
+
+#workspaces {
+  padding: 2px 4px;
+  background: transparent;
+}
+
+#workspaces button {
+  min-width: 22px;
+  margin: 0 2px;
+  padding: 2px 7px;
+  color: #b5cbe1;
+  background: transparent;
+  border-radius: 7px;
+  transition: all 150ms ease;
+}
+
+#workspaces button:hover {
+  color: #ffffff;
+  background: #42678d;
+  box-shadow: none;
+}
+
+#workspaces button.active {
+  color: #17344b;
+  background: #a9e66e;
+}
+
+#workspaces button.urgent {
+  color: #3d1e24;
+  background: #ff8979;
+}
+
+#window {
+  color: #c2d8ed;
+  background: transparent;
+}
+
+#clock {
+  color: #d6edff;
+  font-weight: bold;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+#pulseaudio {
+  color: #a9e3ff;
+}
+
+#memory {
+  color: #c8c6ff;
+}
+
+#cpu {
+  color: #b8e889;
+}
+
+#tray {
+  padding: 4px 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}

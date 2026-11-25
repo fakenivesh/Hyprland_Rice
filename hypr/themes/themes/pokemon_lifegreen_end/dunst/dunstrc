@@ -1,0 +1,66 @@
+[global]
+    monitor = 0
+    follow = mouse
+    width = 340
+    height = 180
+    origin = top-right
+    offset = 14x14
+    scale = 0
+    notification_limit = 5
+    progress_bar = true
+    indicate_hidden = yes
+    transparency = 0
+    separator_height = 1
+    padding = 14
+    horizontal_padding = 14
+    text_icon_padding = 8
+    frame_width = 1
+    frame_color = "#8bcdf0"
+    separator_color = frame
+    sort = yes
+    idle_threshold = 120
+    font = JetBrainsMono Nerd Font 10
+    line_height = 0
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    word_wrap = yes
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 64
+    sticky_history = yes
+    history_length = 20
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    corner_radius = 12
+    ignore_dbusclose = false
+    force_xwayland = false
+    force_xinerama = false
+
+[urgency_low]
+    background = "#163452"
+    foreground = "#b5cbe1"
+    frame_color = "#42678d"
+    timeout = 5
+
+[urgency_normal]
+    background = "#163452"
+    foreground = "#edf4ff"
+    frame_color = "#8bcdf0"
+    timeout = 8
+
+[urgency_critical]
+    background = "#3d2636"
+    foreground = "#fff0ed"
+    frame_color = "#ff8979"
+    timeout = 0

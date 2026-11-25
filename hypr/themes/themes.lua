@@ -1,5 +1,5 @@
 -- Select a theme from themes/themes and link its configs into the locations
--- expected by Waybar, Dunst, hyprpaper, and hypridle.
+-- expected by the configured applications.
 
 local home = assert(os.getenv("HOME"), "HOME is not set")
 local config = home .. "/.config/hypr"
@@ -78,6 +78,23 @@ local links = {
 	{ source = theme_dir .. "/hypridle.conf", target = config .. "/hypridle.conf", kind = "file" },
 }
 
+local optional_links = {
+	{ source = theme_dir .. "/fish", target = home .. "/.config/fish", kind = "directory" },
+	{ source = theme_dir .. "/fuzzel", target = home .. "/.config/fuzzel", kind = "directory" },
+	{ source = theme_dir .. "/kitty", target = home .. "/.config/kitty", kind = "directory" },
+	{ source = theme_dir .. "/quickshell", target = home .. "/.config/quickshell", kind = "directory" },
+	{ source = theme_dir .. "/wlogout", target = home .. "/.config/wlogout", kind = "directory" },
+}
+
+-- Only link optional app configs when the selected theme provides them.
+for _, link in ipairs(optional_links) do
+	local check = link.kind == "directory" and "test -d " or "test -f "
+	local source_exists = run(check .. shell_quote(link.source))
+	if source_exists then
+		links[#links + 1] = link
+	end
+end
+
 -- Validate everything before changing any links, so a partial theme is not
 -- applied.
 for _, link in ipairs(links) do
@@ -99,6 +116,34 @@ for _, link in ipairs(links) do
 	if not ok then
 		io.stderr:write("Could not link " .. link.target .. ": " .. err .. "\n")
 		os.exit(1)
+	end
+end
+
+-- Run the selected theme's setup hook after its config links are in place.
+local setup_script = theme_dir .. "/setup.sh"
+if run("test -f " .. shell_quote(setup_script)) then
+	local ok, err = run("bash " .. shell_quote(setup_script))
+	if not ok then
+		io.stderr:write("Theme links applied, but setup script failed: " .. setup_script .. " (" .. err .. ")\n")
+		os.exit(1)
+	end
+end
+
+-- Reload Hyprland and restart theme-aware services so they pick up the new
+-- symlink targets immediately. A missing/non-running optional service should
+-- not make applying the theme fail.
+local reload_commands = {
+	"hyprctl reload",
+	"pkill -x waybar >/dev/null 2>&1; waybar >/dev/null 2>&1 &",
+	"pkill -x dunst >/dev/null 2>&1; dunst >/dev/null 2>&1 &",
+	"pkill -x hyprpaper >/dev/null 2>&1; hyprpaper >/dev/null 2>&1 &",
+	"pkill -x hypridle >/dev/null 2>&1; hypridle >/dev/null 2>&1 &",
+}
+
+for _, command in ipairs(reload_commands) do
+	local ok, err = run(command)
+	if not ok then
+		io.stderr:write("Theme applied, but reload command failed: " .. command .. " (" .. err .. ")\n")
 	end
 end
 
